@@ -53,14 +53,13 @@ const HeroSection = () => {
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in">
-            The Future of{" "}
-            <span className="text-gradient">DeFi</span>{" "}
-            is Here
+            <span className="text-gradient">Carbon Pepe X</span>{" "}
+            Climate Revolution
           </h1>
 
           {/* Subheadline */}
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed animate-slide-up">
-            Join the next generation of decentralized finance. Secure your position in the most promising crypto presale of 2024.
+            The first climate-focused meme token combining viral culture with real climate impact. Join the presale with minimum investment of $10 and get 25% bonus tokens.
           </p>
 
           {/* Countdown Timer */}

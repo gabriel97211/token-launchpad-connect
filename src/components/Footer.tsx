@@ -40,10 +40,10 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <div className="text-2xl font-bold text-gradient mb-4">
-              CryptoPresale
+              Carbon Pepe X
             </div>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              Building the future of decentralized finance with innovative tokenomics and community-driven governance.
+              The first climate-focused meme token combining viral culture with real environmental impact and sustainable blockchain solutions.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
@@ -88,7 +88,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="text-sm text-muted-foreground">
-            © 2024 CryptoPresale. All rights reserved.
+            © 2025 Carbon Pepe X. All rights reserved.
           </div>
           
           <div className="flex items-center space-x-6 text-sm">

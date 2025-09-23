@@ -5,67 +5,67 @@ import { CheckCircle, Circle, Clock, Rocket, Users, Shield, TrendingUp, Zap } fr
 const RoadmapSection = () => {
   const roadmapData = [
     {
-      phase: "Phase 1",
-      title: "Foundation & Launch",
+      phase: "Q3/Q4 2025",
+      title: "Foundation",
       status: "completed",
-      timeframe: "Q4 2023",
+      timeframe: "Q3/Q4 2025",
       items: [
-        "Smart contract development & audit",
-        "Whitepaper publication",
-        "Team assembly",
-        "Initial community building"
+        "Smart contract development",
+        "Security audit completion", 
+        "Ethereum Mainnet deployment",
+        "Etherscan verification"
       ],
       icon: Shield
     },
     {
-      phase: "Phase 2", 
-      title: "Presale & Marketing",
+      phase: "Q4 2025", 
+      title: "Launch",
       status: "current",
-      timeframe: "Q1 2024",
+      timeframe: "Q4 2025",
       items: [
-        "Public presale launch",
-        "Strategic partnerships",
-        "KOL collaborations",
-        "Security audits completion"
+        "Official presale (In Progress)",
+        "Website development",
+        "Community building",
+        "Whitepaper publication"
       ],
       icon: Rocket
     },
     {
-      phase: "Phase 3",
-      title: "Platform Launch",
+      phase: "Q1 2026",
+      title: "Expansion",
       status: "upcoming",
-      timeframe: "Q2 2024",
+      timeframe: "Q1 2026",
       items: [
-        "DEX listing (Uniswap, PancakeSwap)",
-        "Staking platform launch",
-        "Mobile app beta release",
-        "Governance implementation"
+        "DEX listing (Uniswap)",
+        "CoinMarketCap/CoinGecko listing",
+        "Strategic partnerships",
+        "Marketing campaigns"
       ],
       icon: TrendingUp
     },
     {
-      phase: "Phase 4",
-      title: "Expansion & Growth",
+      phase: "Q2 2026",
+      title: "Utility",
       status: "upcoming", 
-      timeframe: "Q3 2024",
+      timeframe: "Q2 2026",
       items: [
-        "Multi-chain deployment",
-        "CEX listings",
-        "NFT marketplace integration",
-        "Cross-chain bridge"
+        "Climate project launches",
+        "Ecological NFT marketplace",
+        "Gamification and rewards",
+        "Staking and yield farming"
       ],
       icon: Users
     },
     {
-      phase: "Phase 5",
-      title: "Ecosystem Maturation",
+      phase: "Q3 2026",
+      title: "Ecosystem",
       status: "upcoming",
-      timeframe: "Q4 2024 & Beyond",
+      timeframe: "Q3 2026 & Beyond",
       items: [
-        "DeFi protocol partnerships",
-        "Institutional adoption",
-        "Advanced trading features", 
-        "Global expansion"
+        "DAO and governance",
+        "Multi-chain expansion",
+        "CEX listings", 
+        "Advanced DeFi products"
       ],
       icon: Zap
     }

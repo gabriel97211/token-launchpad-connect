@@ -6,11 +6,16 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Wallet, CreditCard, Coins, TrendingUp, Users, Clock } from "lucide-react";
+import WalletModal from "./WalletModal";
+import { toast } from "sonner";
 
 const PresaleWidget = () => {
   const [selectedPayment, setSelectedPayment] = useState("ETH");
   const [amount, setAmount] = useState("");
   const [tokenAmount, setTokenAmount] = useState("");
+  const [referralCode, setReferralCode] = useState("");
+  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
+  const [connectedWallet, setConnectedWallet] = useState<string | null>(null);
 
   const paymentMethods = [
     { symbol: "ETH", name: "Ethereum", icon: "Ξ", price: 0.0035 },
@@ -39,6 +44,32 @@ const PresaleWidget = () => {
     } else {
       setTokenAmount("");
     }
+  };
+
+  const handleWalletConnect = () => {
+    setIsWalletModalOpen(true);
+  };
+
+  const handleWalletSelect = (walletId: string) => {
+    setConnectedWallet(walletId);
+    toast.success(`${walletId} wallet connected successfully!`);
+  };
+
+  const handlePurchase = () => {
+    if (!connectedWallet) {
+      toast.error("Please connect your wallet first");
+      return;
+    }
+    if (!amount) {
+      toast.error("Please enter an amount");
+      return;
+    }
+    toast.success("Purchase initiated! Please confirm the transaction in your wallet.");
+  };
+
+  const handleCopyReferral = () => {
+    navigator.clipboard.writeText("https://carbonpepex.io/ref/abc123");
+    toast.success("Referral link copied to clipboard!");
   };
 
   return (
@@ -165,6 +196,8 @@ const PresaleWidget = () => {
                           value={amount}
                           onChange={(e) => handleAmountChange(e.target.value)}
                           className="text-lg"
+                          min="0.0022"
+                          max="10"
                         />
                       </div>
 
@@ -181,15 +214,41 @@ const PresaleWidget = () => {
                       </div>
                     </div>
 
-                    {/* Purchase Button */}
-                    <Button 
-                      className="w-full bg-gradient-primary glow-primary hover:shadow-glow-primary transition-all duration-300"
-                      size="lg"
-                      disabled={!amount}
-                    >
-                      <CreditCard className="w-4 h-4 mr-2" />
-                      Purchase Tokens
-                    </Button>
+                    {/* Referral Code Input */}
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">
+                        Referral Code (Optional)
+                      </label>
+                      <Input
+                        type="text"
+                        placeholder="Enter referral code for 25% bonus"
+                        value={referralCode}
+                        onChange={(e) => setReferralCode(e.target.value)}
+                        className="text-sm"
+                      />
+                    </div>
+
+                    {/* Connect Wallet / Purchase Button */}
+                    {!connectedWallet ? (
+                      <Button 
+                        className="w-full bg-gradient-primary glow-primary hover:shadow-glow-primary transition-all duration-300"
+                        size="lg"
+                        onClick={handleWalletConnect}
+                      >
+                        <Wallet className="w-4 h-4 mr-2" />
+                        Connect Wallet
+                      </Button>
+                    ) : (
+                      <Button 
+                        className="w-full bg-gradient-primary glow-primary hover:shadow-glow-primary transition-all duration-300"
+                        size="lg"
+                        disabled={!amount}
+                        onClick={handlePurchase}
+                      >
+                        <CreditCard className="w-4 h-4 mr-2" />
+                        Purchase CPX Tokens
+                      </Button>
+                    )}
 
                     <div className="text-xs text-muted-foreground text-center">
                       Min purchase: 0.1 ETH • Max purchase: 10 ETH per wallet
@@ -205,10 +264,14 @@ const PresaleWidget = () => {
                       <div className="p-4 bg-secondary rounded-lg">
                         <div className="text-sm text-muted-foreground mb-2">Your Referral Link:</div>
                         <div className="font-mono text-sm bg-background p-2 rounded border break-all">
-                          https://cryptopresale.io/ref/abc123
+                          https://carbonpepex.io/ref/abc123
                         </div>
                       </div>
-                      <Button variant="outline" className="w-full">
+                      <Button 
+                        variant="outline" 
+                        className="w-full"
+                        onClick={handleCopyReferral}
+                      >
                         Copy Referral Link
                       </Button>
                     </div>
@@ -219,6 +282,12 @@ const PresaleWidget = () => {
           </div>
         </div>
       </div>
+      
+      <WalletModal 
+        isOpen={isWalletModalOpen}
+        onClose={() => setIsWalletModalOpen(false)}
+        onWalletSelect={handleWalletSelect}
+      />
     </section>
   );
 };
