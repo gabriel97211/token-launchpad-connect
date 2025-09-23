@@ -1,0 +1,225 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle, Circle, Clock, Rocket, Users, Shield, TrendingUp, Zap } from "lucide-react";
+
+const RoadmapSection = () => {
+  const roadmapData = [
+    {
+      phase: "Phase 1",
+      title: "Foundation & Launch",
+      status: "completed",
+      timeframe: "Q4 2023",
+      items: [
+        "Smart contract development & audit",
+        "Whitepaper publication",
+        "Team assembly",
+        "Initial community building"
+      ],
+      icon: Shield
+    },
+    {
+      phase: "Phase 2", 
+      title: "Presale & Marketing",
+      status: "current",
+      timeframe: "Q1 2024",
+      items: [
+        "Public presale launch",
+        "Strategic partnerships",
+        "KOL collaborations",
+        "Security audits completion"
+      ],
+      icon: Rocket
+    },
+    {
+      phase: "Phase 3",
+      title: "Platform Launch",
+      status: "upcoming",
+      timeframe: "Q2 2024",
+      items: [
+        "DEX listing (Uniswap, PancakeSwap)",
+        "Staking platform launch",
+        "Mobile app beta release",
+        "Governance implementation"
+      ],
+      icon: TrendingUp
+    },
+    {
+      phase: "Phase 4",
+      title: "Expansion & Growth",
+      status: "upcoming", 
+      timeframe: "Q3 2024",
+      items: [
+        "Multi-chain deployment",
+        "CEX listings",
+        "NFT marketplace integration",
+        "Cross-chain bridge"
+      ],
+      icon: Users
+    },
+    {
+      phase: "Phase 5",
+      title: "Ecosystem Maturation",
+      status: "upcoming",
+      timeframe: "Q4 2024 & Beyond",
+      items: [
+        "DeFi protocol partnerships",
+        "Institutional adoption",
+        "Advanced trading features", 
+        "Global expansion"
+      ],
+      icon: Zap
+    }
+  ];
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "completed":
+        return "text-success";
+      case "current":
+        return "text-primary";
+      default:
+        return "text-muted-foreground";
+    }
+  };
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case "completed":
+        return CheckCircle;
+      case "current":
+        return Clock;
+      default:
+        return Circle;
+    }
+  };
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case "completed":
+        return <Badge variant="outline" className="glow-success">Completed</Badge>;
+      case "current":
+        return <Badge variant="outline" className="glow-primary animate-pulse-glow">Current</Badge>;
+      default:
+        return <Badge variant="outline">Upcoming</Badge>;
+    }
+  };
+
+  return (
+    <section id="roadmap" className="py-20 relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <Badge variant="secondary" className="mb-4 px-4 py-2">
+            <Rocket className="w-4 h-4 mr-2" />
+            Roadmap
+          </Badge>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Our Journey to <span className="text-gradient">Success</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Follow our strategic roadmap as we build the future of decentralized finance, one milestone at a time.
+          </p>
+        </div>
+
+        <div className="max-w-6xl mx-auto">
+          {/* Desktop Timeline */}
+          <div className="hidden md:block relative">
+            {/* Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-primary opacity-20"></div>
+            
+            {roadmapData.map((item, index) => {
+              const StatusIcon = getStatusIcon(item.status);
+              const PhaseIcon = item.icon;
+              const isEven = index % 2 === 0;
+              
+              return (
+                <div key={item.phase} className="relative mb-16 last:mb-0">
+                  {/* Timeline Node */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2">
+                    <div className="w-4 h-4 rounded-full bg-gradient-primary glow-primary border-4 border-background"></div>
+                  </div>
+
+                  <div className={`flex items-center ${isEven ? 'flex-row-reverse' : ''}`}>
+                    <div className="w-1/2"></div>
+                    <div className={`w-1/2 ${isEven ? 'pr-12' : 'pl-12'}`}>
+                      <Card className="gradient-border bg-gradient-card shadow-elevated animate-fade-in" style={{animationDelay: `${index * 0.2}s`}}>
+                        <CardContent className="p-6">
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center space-x-3">
+                              <div className={`w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center glow-primary`}>
+                                <PhaseIcon className="w-5 h-5 text-primary-foreground" />
+                              </div>
+                              <div>
+                                <div className="font-semibold text-sm text-accent">{item.phase}</div>
+                                <h3 className="text-xl font-bold">{item.title}</h3>
+                              </div>
+                            </div>
+                            {getStatusBadge(item.status)}
+                          </div>
+                          
+                          <div className="mb-4">
+                            <div className="text-sm text-muted-foreground mb-2">{item.timeframe}</div>
+                          </div>
+
+                          <ul className="space-y-2">
+                            {item.items.map((task, taskIndex) => (
+                              <li key={taskIndex} className="flex items-start space-x-2">
+                                <StatusIcon className={`w-4 h-4 mt-0.5 flex-shrink-0 ${getStatusColor(item.status)}`} />
+                                <span className="text-sm">{task}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mobile Timeline */}
+          <div className="md:hidden space-y-8">
+            {roadmapData.map((item, index) => {
+              const StatusIcon = getStatusIcon(item.status);
+              const PhaseIcon = item.icon;
+              
+              return (
+                <Card key={item.phase} className="gradient-border bg-gradient-card shadow-elevated animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center glow-primary">
+                          <PhaseIcon className="w-5 h-5 text-primary-foreground" />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-sm text-accent">{item.phase}</div>
+                          <h3 className="text-lg font-bold">{item.title}</h3>
+                        </div>
+                      </div>
+                      {getStatusBadge(item.status)}
+                    </div>
+                    
+                    <div className="mb-4">
+                      <div className="text-sm text-muted-foreground">{item.timeframe}</div>
+                    </div>
+
+                    <ul className="space-y-2">
+                      {item.items.map((task, taskIndex) => (
+                        <li key={taskIndex} className="flex items-start space-x-2">
+                          <StatusIcon className={`w-4 h-4 mt-0.5 flex-shrink-0 ${getStatusColor(item.status)}`} />
+                          <span className="text-sm">{task}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default RoadmapSection;
